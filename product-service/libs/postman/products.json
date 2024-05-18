@@ -1,0 +1,140 @@
+{
+  "info": {
+    "name": "Product Service",
+    "_postman_id": "12345678-1234-1234-1234-123456789012",
+    "description": "API collection for the product service of the e-commerce website selling scented candles.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Create Product",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"name\": \"Lavender Bliss Candle\",\"description\": \"A soothing lavender-scented candle to help you relax and unwind.\",\"price\": 15.99,\"quantity\": 50,\"scent\": \"Lavender\",\"size\": \"Medium\",\"weight\": 300,\"imageUrl\": \"https://example.com/images/lavender-bliss.jpg\",\"category\": \"Relaxation\",\"rating\": 4.8,\"createdAt\": \"2023-01-15T12:00:00Z\",\"updatedAt\": \"2024-05-15T12:00:00Z\"}"
+        },
+        "url": {
+          "raw": "http://localhost:3002/products/createProduct",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3002",
+          "path": [
+            "products",
+            "createProduct"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get Product By ID",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3002/products/getProductById?id=REPLACE_WITH_PRODUCT_ID",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3002",
+          "path": [
+            "products",
+            "getProductById"
+          ],
+          "query": [
+            {
+              "key": "id",
+              "value": "REPLACE_WITH_PRODUCT_ID"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get All Products",
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3002/products/getProducts",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3002",
+          "path": [
+            "products",
+            "getProducts"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Product",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\"id\": \"REPLACE_WITH_PRODUCT_ID\",\"name\": \"Lavender Bliss Candle Updated\",\"description\": \"An updated soothing lavender-scented candle to help you relax and unwind.\",\"price\": 16.99,\"quantity\": 45,\"scent\": \"Lavender\",\"size\": \"Medium\",\"weight\": 300,\"imageUrl\": \"https://example.com/images/lavender-bliss.jpg\",\"category\": \"Relaxation\",\"rating\": 4.9,\"updatedAt\": \"2024-05-16T12:00:00Z\"}"
+        },
+        "url": {
+          "raw": "http://localhost:3002/products/updateProduct",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3002",
+          "path": [
+            "products",
+            "updateProduct"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Delete Product",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "http://localhost:3002/products/deleteProduct?id=REPLACE_WITH_PRODUCT_ID",
+          "protocol": "http",
+          "host": [
+            "localhost"
+          ],
+          "port": "3002",
+          "path": [
+            "products",
+            "deleteProduct"
+          ],
+          "query": [
+            {
+              "key": "id",
+              "value": "REPLACE_WITH_PRODUCT_ID"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
