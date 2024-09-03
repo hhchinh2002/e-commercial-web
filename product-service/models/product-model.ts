@@ -25,7 +25,7 @@ ProductSchema.pre('save', function (next) {
 });
 
 // Create the Product model
-const ProductModel: Model<Product & Document> = db.model<Product & Document>('product', ProductSchema);
+const ProductModel: Model<Product & Document> = db.model<Product & Document>('products', ProductSchema);
 
 // Export CRUD operations as functions
 export const createProduct = async (productData: Product & Document) => {
