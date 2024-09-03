@@ -2,7 +2,7 @@ import type { NextPage } from "next";
 import Footer from "../components/Footer";
 import Navbar from "src/components/Navbar";
 import { Button } from "@mui/material";
-import Product from "src/components/Product";
+import ProductCard from "src/components/ProductCard";
 
 const Homepage: NextPage = () => {
   return (
@@ -47,9 +47,9 @@ const Homepage: NextPage = () => {
           Best-Sellers
         </h1>
         <div className="self-stretch grid flex-row items-start justify-start pt-0 px-0 pb-[125px] box-border gap-[20px] max-w-full grid-cols-[repeat(3,_minmax(313px,_1fr))] text-5xl lg:justify-center lg:grid-cols-[repeat(2,_minmax(313px,_542px))] mq750:pb-[81px] mq750:box-border mq750:grid-cols-[minmax(313px,_1fr)]">
-          <Product cardImages="/rectangle-18@2x.png" />
-          <Product cardImages="/rectangle-18-1@2x.png" />
-          <Product cardImages="/rectangle-18-2@2x.png" />
+          <ProductCard name="placeholder" price={30} imageUrl="" />
+          <ProductCard name="placeholder" price={30} imageUrl="" />
+          <ProductCard name="placeholder" price={30} imageUrl="" />
         </div>
       </div>
       </section>

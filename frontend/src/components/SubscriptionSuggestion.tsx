@@ -17,8 +17,7 @@ const SubscriptionSuggestion: NextPage = () => {
               Subscribe now and get 10% off all items
             </h1>
             <div className="self-stretch relative text-base tracking-[-0.5px] leading-[35px] font-rubik">
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text.
+              {"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text."}
             </div>
           </div>
           <div className="self-stretch flex flex-row items-start justify-start gap-[1px] max-w-full mq800:flex-wrap">
