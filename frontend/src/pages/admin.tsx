@@ -1,10 +1,11 @@
 import type { NextPage } from "next";
-import { Collapse } from "@mui/material";
+import { Button, Collapse } from "@mui/material";
 import { DataGrid, GridColDef, GridRowParams } from "@mui/x-data-grid";
 import AdminNavbar from "../components/AdminNavbar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Product } from "src/types/IProduct";
 import AdminProductDetail from "src/components/AdminProductDetail";
+import productService from "src/helpers/product-service/api-wrappers";
 
 const columns: GridColDef[] = [
   { field: "name", headerName: "Name", width: 130 },
@@ -31,42 +32,40 @@ const columns: GridColDef[] = [
   },
 ];
 
-const rows = [
-  {
-    id: 1,
-    name: "Product 1",
-    description: "Description for product 1",
-    price: 100,
-    quantity: 10,
-    scent: "Floral",
-    size: "Medium",
-    weight: 500,
-    imageUrl: "http://example.com/image1.jpg",
-    category: "Category 1",
-    rating: 4.5,
-    createdAt: new Date("2023-01-01"),
-    updatedAt: new Date("2023-06-01"),
-  },
-  {
-    id: 2,
-    name: "Product 2",
-    description: "Description for product 2",
-    price: 200,
-    quantity: 5,
-    scent: "Citrus",
-    size: "Large",
-    weight: 1000,
-    imageUrl: "http://example.com/image2.jpg",
-    category: "Category 2",
-    rating: 4.0,
-    createdAt: new Date("2023-02-01"),
-    updatedAt: new Date("2023-06-02"),
-  },
-  // Add more rows as needed
-];
-
 const Admin: NextPage = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
+  const [products, setProducts] = useState<Product[]>([]);
+  const [isAddingProduct, setIsAddingProduct] = useState<Boolean>(false);
+  const [page, setPage] = useState<number>(1);
+  const [lastPage, setLastPage] = useState<number>(1);
+
+  const getProducts = async () => {
+    try {
+      const products = await productService.getProducts();
+      setProducts(products);
+      setLastPage(Math.ceil(products.length / 6));
+    } catch (err) {
+      console.log("error fetching products", err);
+    }
+  };
+
+  const createProduct = async (product: Product) => {
+    try {
+      await productService.createProduct(product);
+    } catch (err) {
+      console.log("error creating product", err);
+    }
+  };
+
+  useEffect(() => {
+    (async () => {
+      try {
+        await getProducts();
+      } catch (err) {
+        console.error(err);
+      }
+    })();
+  }, []);
 
   const handleRowClick = (params: GridRowParams) => {
     setSelectedProduct(params.row);
@@ -74,21 +73,86 @@ const Admin: NextPage = () => {
 
   return (
     <div>
-      <AdminNavbar />
-      <div className="mt-[100px] w-100%">
-        <DataGrid
-          rows={rows}
-          columns={columns}
-          initialState={{
-            pagination: {
-              paginationModel: { page: 0, pageSize: 5 },
-            },
-          }}
-          pageSizeOptions={[5, 10]}
-          checkboxSelection 
-          onRowClick={params => handleRowClick(params)}
-        />
-      </div>
+      {isAddingProduct ? (
+        <div>
+          <div className="relative justify-center items-center">
+            <div className="absolute justify-center items-center bg-white w-[400px] h-[400px] shadow-lg">
+              this is a form lk12k4l1l2k4
+            </div>
+          </div>
+          <div className="opacity-50">
+            <AdminNavbar />
+            <div className="mt-[100px] w-100%">
+              <DataGrid
+                getRowId={(product) => product._id}
+                rows={products}
+                columns={columns}
+                initialState={{
+                  pagination: {
+                    paginationModel: { page: 0, pageSize: 5 },
+                  },
+                }}
+                pageSizeOptions={[5, 10]}
+                checkboxSelection
+                onRowClick={(params) => handleRowClick(params)}
+              />
+            </div>
+            <Button
+              className="h-[45px] flex-[0.9375] min-w-[83px] mq450:flex-1 max-w-[130px]"
+              disableElevation={true}
+              variant="contained"
+              sx={{
+                textTransform: "none",
+                color: "#fff",
+                fontSize: "18",
+                background: "#facfad",
+                borderRadius: "0px 0px 0px 0px",
+                "&:hover": { background: "#f5ac72" },
+                height: 45,
+              }}
+              onClick={() => setIsAddingProduct(true)}
+            >
+              Add product
+            </Button>
+          </div>
+        </div>
+      ) : (
+        <div>
+          <AdminNavbar />
+          <div className="mt-[100px] w-100%">
+            <DataGrid
+              getRowId={(product) => product._id}
+              rows={products}
+              columns={columns}
+              initialState={{
+                pagination: {
+                  paginationModel: { page: 0, pageSize: 5 },
+                },
+              }}
+              pageSizeOptions={[5, 10]}
+              checkboxSelection
+              onRowClick={(params) => handleRowClick(params)}
+            />
+          </div>
+          <Button
+            className="h-[45px] flex-[0.9375] min-w-[83px] mq450:flex-1 max-w-[130px]"
+            disableElevation={true}
+            variant="contained"
+            sx={{
+              textTransform: "none",
+              color: "#fff",
+              fontSize: "18",
+              background: "#facfad",
+              borderRadius: "0px 0px 0px 0px",
+              "&:hover": { background: "#f5ac72" },
+              height: 45,
+            }}
+            onClick={() => setIsAddingProduct(true)}
+          >
+            Add product
+          </Button>
+        </div>
+      )}
     </div>
   );
 };

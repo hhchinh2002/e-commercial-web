@@ -35,23 +35,31 @@ const getProducts = async (): Promise<Product[]> => {
   }
 };
 
-// const register = async (email: string, password: string) => {
-//   try {
-//     await api.post(`/register`, {
-//       email: email,
-//       password: password,
-//       name: "name placeholder",
-//       major: "major placeholder",
-//       role: "student",
-//     });
-//   } catch (error) {
-//     if (isAxiosError(error) && error?.response?.data) {
-//       const responseData = error.response as ErrorResponse;
-//       throw new Error(responseData.data.message);
-//     }
-//     throw new Error("Unknown error signing up, please try again");
-//   }
-// };
+const createProduct = async (product: Product) => {
+  try {
+    const {name, description, price, quantity, scent, size, weight, imageUrl, category, rating} = product
+    await api.post(`/createProduct`, {
+      name: name,
+      description: description,
+      price: price,
+      quantity: quantity,
+      scent: scent,
+      size: size,
+      weight: weight,
+      imageUrl: imageUrl,
+      category: category,
+      rating: rating,
+      createdAt: Date.prototype.getTime(),
+      updatedAt: Date.prototype.getTime(),
+    });
+  } catch (error) {
+    if (isAxiosError(error) && error?.response?.data) {
+      const responseData = error.response as ErrorResponse;
+      throw new Error(responseData.data.message);
+    }
+    throw new Error("Unknown error creating product, please try again");
+  }
+};
 
 // const getUserInfo = async (uid: number): Promise<UserInfo | null> => {
 //   try {
@@ -181,7 +189,8 @@ const getProducts = async (): Promise<Product[]> => {
 // };
 
 const productService = {
-  getProducts
+  getProducts,
+  createProduct
 };
 
 export default productService;

@@ -14,7 +14,7 @@ const ProductCard: NextPage<ProductCardParams> = ({ imageUrl, name, price } : Pr
   }
   console.log(imageUrl);
   return (
-    <div className="flex min-w-[400px] flex-col items-start justify-start gap-[24px] max-w-full text-center text-5xl text-darkslategray font-raleway">
+    <div className="flex min-w-[400px] flex-col items-start justify-start gap-[24px] max-w-[500px] text-center text-5xl text-darkslategray font-raleway">
       <img
         className="self-stretch h-[400px] relative max-w-full overflow-hidden shrink-0 object-cover"
         loading="lazy"
@@ -26,7 +26,7 @@ const ProductCard: NextPage<ProductCardParams> = ({ imageUrl, name, price } : Pr
           {name}
         </div>
         <div className="self-stretch flex flex-row items-start justify-center py-0 px-5 text-left text-lg font-rubik">
-          <div className="relative tracking-[-0.5px] inline-block min-w-[61px] whitespace-nowrap">
+          <div className="relative tracking-[-0.5px] inline-block whitespace-nowrap">
             $ {price}
           </div>
         </div>
